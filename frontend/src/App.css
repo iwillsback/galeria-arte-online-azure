@@ -1,0 +1,164 @@
+/* -------------------------------------- */
+/* 1. VARIÁVEIS E ESTILOS GLOBAIS (NETFLIX BASE) */
+/* -------------------------------------- */
+:root {
+    --netflix-background: #141414;
+    --netflix-red: #e50914;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --card-background: #181818;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--netflix-background);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* -------------------------------------- */
+/* 2. CABEÇALHO E MENSAGENS DE ESTADO */
+/* -------------------------------------- */
+.gallery-header {
+    background: linear-gradient(to bottom, #252525 0%, #141414 100%);
+    color: var(--text-primary);
+    padding: 20px;
+    /* CENTRALIZA O TÍTULO */
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+}
+
+.gallery-header h1 {
+    font-size: 3em;
+    margin: 0;
+    letter-spacing: 1.5px;
+    color: var(--netflix-red);
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+}
+
+.loading-message, .error-message {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 1.5em;
+    color: var(--netflix-red);
+}
+
+/* -------------------------------------- */
+/* 3. LISTA DE OBRAS (COLUNA CENTRALIZADA) */
+/* -------------------------------------- */
+.obras-list {
+    display: flex;
+    /* FORÇA OS CARDS EM COLUNA (UM ABAIXO DO OUTRO) */
+    flex-direction: column; 
+    /* Remove align-items: center; aqui e usa margin: 0 auto; para centralizar o bloco */
+    padding: 40px 20px;
+    gap: 30px; 
+    /* Limita a largura da coluna de cards */
+    max-width: 800px;
+    /* CENTRA O BLOCO INTEIRO NA HORIZONTAL DA TELA */
+    margin: 0 auto; 
+}
+
+/* -------------------------------------- */
+/* 4. ESTILO DO CARD E HOVER */
+/* -------------------------------------- */
+.obra-card {
+    background-color: var(--card-background);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    /* Garante que o card preencha a largura do bloco `.obras-list` */
+    width: 100%; 
+    max-width: 700px; /* Limita o tamanho do card individual */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.obra-card:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+    z-index: 10;
+}
+
+.obra-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.obra-details {
+    padding: 15px 20px;
+}
+
+.obra-title {
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+    font-weight: 700;
+    border-left: 3px solid var(--netflix-red); 
+    padding-left: 10px;
+}
+
+.obra-artist {
+    font-style: normal;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    font-size: 1em;
+}
+
+/* -------------------------------------- */
+/* 5. MODAL (IMAGEM GRANDE) */
+/* -------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.modal-content {
+    max-width: 95%;
+    max-height: 95%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 95vh;
+    display: block;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: var(--netflix-red); 
+    font-size: 40px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    text-shadow: 0 0 5px black;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
