@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'backend/**' # Gatilho se houver mudanças na pasta backend
+      
 
 env:
-  # NOME DA FUNCTION APP NA AZURE (Ex: func-galeria-api-123)
+
   AZURE_FUNCTION_APP_NAME: func-galeria-api-123 
   AZURE_FUNCTION_PACKAGE_PATH: 'backend' 
   PYTHON_VERSION: '3.12' 
@@ -26,7 +25,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
           
-      # PASSO CRUCIAL: Instalação das dependências ODBC no Linux
+    
       - name: 'Install Linux ODBC Dependencies'
         run: |
           sudo apt-get update
@@ -52,5 +51,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_FUNCTION_APP_NAME }}
           package: ${{ env.AZURE_FUNCTION_PACKAGE_PATH }}
-          # Usa a SECRET configurada no GitHub
+
           publish-profile: ${{ secrets.AZURE_FUNCTION_PUBLISH_PROFILE }}
