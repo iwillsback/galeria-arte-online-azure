@@ -73,7 +73,7 @@ function App() {
     return (
         <div className="gallery-container">
             <header className="gallery-header">
-                <h1>🖼️ Galeria de Artes Online (React + Azure)</h1>
+                <h1>🖼️ Galeria de Artes </h1>
             </header>
             <div className="obras-list">
                 {obras.length > 0 ? (

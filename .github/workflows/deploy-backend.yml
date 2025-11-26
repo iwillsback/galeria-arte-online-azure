@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**' # Gatilho apenas se houver mudanças na pasta backend
+      - 'frontend/**' # Gatilho apenas se houver mudanças na pasta backend
 
 env:
   # NOME DA FUNCTION APP NA AZURE (SUBSTITUIDO)
