@@ -35,6 +35,6 @@ jobs:
           action: "upload"
           
           # Detalhes da Compilação
-          app_location: "/frontend" 
-          api_location: "/backend"  
+          app_location: "./frontend" 
+          api_location: "backend"  
           output_location: "dist"
