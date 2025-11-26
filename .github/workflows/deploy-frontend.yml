@@ -19,9 +19,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # REMOVEMOS 'cache: npm' PARA EVITAR O ERRO DE ARQUIVO DE BLOQUEIO AUSENTE NA RAIZ
+          # O cache foi removido para evitar o erro de lock file (conforme correção anterior)
 
-      # PASSO NOVO E CRUCIAL: Instalação das dependências do Frontend
+      # PASSO CRUCIAL 1: Instalação das dependências do Frontend
       - name: Install Frontend Dependencies
         run: npm install
         working-directory: ./frontend 
@@ -30,9 +30,11 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # TOKEN CORRIGIDO: Este nome é o que está no seu Repositório Secrets do GitHub
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_HILL_05103F1A0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
+          
           # Detalhes da Compilação
           app_location: "/frontend" 
           api_location: "/backend"  
