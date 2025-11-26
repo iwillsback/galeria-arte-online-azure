@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-      
+    paths:
+      - 'frontend/**' # Só dispara se houver mudanças no Frontend
 
 jobs:
   build_and_deploy_job:
@@ -18,8 +19,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Use uma versão recente do Node
-          cache: 'npm'
+          node-version: 20
+          # REMOVEMOS 'cache: npm' PARA EVITAR O ERRO DE ARQUIVO DE BLOQUEIO AUSENTE NA RAIZ
+
+      # PASSO NOVO E CRUCIAL: Instalação das dependências do Frontend
+      - name: Install Frontend Dependencies
+        run: npm install
+        working-directory: ./frontend 
 
       - name: Build And Deploy
         id: builddeploy
@@ -29,6 +35,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           # Detalhes da Compilação
-          app_location: "/frontend" # Onde está o React
-          api_location: "/backend"  # Onde está a Azure Function
-          output_location: "dist"   # Onde o Vite/React gera a saída
+          app_location: "/frontend" 
+          api_location: "/backend"  
+          output_location: "dist"
