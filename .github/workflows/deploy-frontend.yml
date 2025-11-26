@@ -36,5 +36,5 @@ jobs:
           
           # Detalhes da Compilação
           app_location: "./frontend" 
-          api_location: "backend"  
+          api_location: ""  
           output_location: "dist"
