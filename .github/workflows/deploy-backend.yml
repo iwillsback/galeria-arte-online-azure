@@ -1,47 +1,40 @@
-name: Deploy Azure Function (Backend)
+name: Azure Static Web Apps CI/CD - Frontend
 
 on:
   push:
     branches:
       - main
-    # Remova a linha 'paths:' ou garanta que a sintaxe esteja 100% correta
-    # Vamos simplificar, acionando em qualquer push na main:
+    paths:
+      - 'frontend/**' # Só dispara se houver mudanças no Frontend
+
 jobs:
-  build-and-deploy:
+  build_and_deploy_job:
     runs-on: ubuntu-latest
+    name: Build_and_Deploy
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python environment
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
         with:
-          python-version: 3.12 # Versão fixa, como acordado
-          cache: 'pip'
-          
-      # PASSO CRUCIAL: Instalação das dependências ODBC no Linux
-      - name: 'Install Linux ODBC Dependencies'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unixodbc-dev
-          
-          # Adiciona o repositório da Microsoft e instala o Driver 18
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
-          sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
+          submodules: true
 
-      - name: 'Resolve project dependencies'
-        shell: bash
-        run: |
-          pip install --upgrade pip
-          # Usa o caminho da pasta backend para o requirements.txt
-          pip install -r backend/requirements.txt
-
-      - name: 'Azure Login & Deploy'
-        uses: azure/functions-action@v1
-        id: deploy
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          app-name: func-galeria-api-123
-          package: backend # O pacote de deploy é a pasta backend
-          publish-profile: ${{ secrets.AZURE_FUNCTION_PUBLISH_PROFILE }}
+          node-version: 20 # Versão robusta para React/Vite
+          cache: 'npm'
+
+      - name: Install Frontend Dependencies
+        run: npm install
+        working-directory: ./frontend
+        
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # O Secret do Token de segurança da Static Web App
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_HILL_05103F1A0F }} 
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          # Detalhes da Compilação
+          app_location: "/frontend"  # Onde está o React
+          api_location: "/backend"   # Onde está a Azure Function (API)
+          output_location: "dist"    # Onde o Vite/React gera a saída
