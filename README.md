@@ -57,13 +57,6 @@ O projeto cumpre 100% dos requisitos solicitados:
 
 ---
 
-## 📸 Screenshots
-
-### Tela Principal (Estilo Galeria)
-*(Adicione aqui um print da sua tela final se quiser, ou deixe apenas a descrição)*
-
----
-
 ## ⚙️ Como Rodar Localmente
 
 Caso queira testar o projeto em sua máquina:
