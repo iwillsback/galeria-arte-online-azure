@@ -4,14 +4,18 @@ on:
   push:
     branches:
       - main
+<<<<<<< HEAD
     paths:
       - 'frontend/**' # Gatilho apenas se houver mudanças na pasta backend
+=======
+      
+>>>>>>> 0d2750941743283b8e0080a3289e8d0869bcfcb9
 
 env:
-  # NOME DA FUNCTION APP NA AZURE (SUBSTITUIDO)
+
   AZURE_FUNCTION_APP_NAME: func-galeria-api-123 
   AZURE_FUNCTION_PACKAGE_PATH: 'backend' 
-  PYTHON_VERSION: '3.12' # Versão que escolhemos na Azure
+  PYTHON_VERSION: '3.12' 
 
 jobs:
   build-and-deploy:
@@ -25,11 +29,25 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
+          
+    
+      - name: 'Install Linux ODBC Dependencies'
+        run: |
+          sudo apt-get update
+          # Instala o driver ODBC e utilitários
+          sudo apt-get install -y unixodbc-dev
+          
+          # Adiciona o repositório da Microsoft e instala o Driver 18
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
 
       - name: 'Resolve project dependencies'
         shell: bash
         run: |
           pip install --upgrade pip
+          # Instala o pyodbc, que agora encontra os drivers nativos
           pip install -r ${{ env.AZURE_FUNCTION_PACKAGE_PATH }}/requirements.txt
 
       - name: 'Azure Login & Deploy'
@@ -38,5 +56,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_FUNCTION_APP_NAME }}
           package: ${{ env.AZURE_FUNCTION_PACKAGE_PATH }}
-          # Usa a SECRET criada no passo 5.1.C no GitHub
+
           publish-profile: ${{ secrets.AZURE_FUNCTION_PUBLISH_PROFILE }}
