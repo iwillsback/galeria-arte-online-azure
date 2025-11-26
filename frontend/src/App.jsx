@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'; 
 
-// URL da API (usada na produção pelo Static Web App)
+
 const API_URL = '/api/GetObrasFunction'; 
 
-// Componente Modal para mostrar a imagem em tela cheia
+
 const ImageModal = ({ imageUrl, onClose }) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -21,13 +21,13 @@ function App() {
     const [obras, setObras] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // Novo estado para controlar o Modal
+    
     const [selectedImage, setSelectedImage] = useState(null); 
 
     useEffect(() => {
         const fetchObras = async () => {
             try {
-                // Durante o teste local, use 'http://localhost:7071/api/GetObrasFunction'
+                
                 const url = window.location.hostname === 'localhost' 
                     ? 'http://localhost:7071/api/GetObrasFunction' 
                     : API_URL; 
@@ -51,12 +51,12 @@ function App() {
         fetchObras();
     }, []);
 
-    // Função para abrir o Modal
+    
     const handleCardClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
 
-    // Função para fechar o Modal
+    
     const handleCloseModal = () => {
         setSelectedImage(null);
     };
@@ -78,7 +78,7 @@ function App() {
             <div className="obras-list">
                 {obras.length > 0 ? (
                     obras.map((obra) => (
-                        // Adiciona o evento onClick no card
+                        
                         <div 
                             key={obra.Nome} 
                             className="obra-card"

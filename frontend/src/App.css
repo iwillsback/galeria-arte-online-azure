@@ -1,6 +1,4 @@
-/* -------------------------------------- */
-/* 1. VARIÁVEIS E ESTILOS GLOBAIS (NETFLIX BASE) */
-/* -------------------------------------- */
+
 :root {
     --netflix-background: #141414;
     --netflix-red: #e50914;
@@ -18,14 +16,12 @@ body {
     line-height: 1.5;
 }
 
-/* -------------------------------------- */
-/* 2. CABEÇALHO E MENSAGENS DE ESTADO */
-/* -------------------------------------- */
+
 .gallery-header {
     background: linear-gradient(to bottom, #252525 0%, #141414 100%);
     color: var(--text-primary);
     padding: 20px;
-    /* CENTRALIZA O TÍTULO */
+    
     text-align: center;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
     position: sticky;
@@ -48,32 +44,28 @@ body {
     color: var(--netflix-red);
 }
 
-/* -------------------------------------- */
-/* 3. LISTA DE OBRAS (COLUNA CENTRALIZADA) */
-/* -------------------------------------- */
+
 .obras-list {
     display: flex;
-    /* FORÇA OS CARDS EM COLUNA (UM ABAIXO DO OUTRO) */
+    
     flex-direction: column; 
-    /* Remove align-items: center; aqui e usa margin: 0 auto; para centralizar o bloco */
+    
     padding: 40px 20px;
     gap: 30px; 
-    /* Limita a largura da coluna de cards */
+    
     max-width: 800px;
-    /* CENTRA O BLOCO INTEIRO NA HORIZONTAL DA TELA */
+    
     margin: 0 auto; 
 }
 
-/* -------------------------------------- */
-/* 4. ESTILO DO CARD E HOVER */
-/* -------------------------------------- */
+
 .obra-card {
     background-color: var(--card-background);
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    /* Garante que o card preencha a largura do bloco `.obras-list` */
+    
     width: 100%; 
-    max-width: 700px; /* Limita o tamanho do card individual */
+    max-width: 700px; 
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s;
     text-align: left;
@@ -116,9 +108,7 @@ body {
     font-size: 1em;
 }
 
-/* -------------------------------------- */
-/* 5. MODAL (IMAGEM GRANDE) */
-/* -------------------------------------- */
+
 .modal-overlay {
     position: fixed;
     top: 0;

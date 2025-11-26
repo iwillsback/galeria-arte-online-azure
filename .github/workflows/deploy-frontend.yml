@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 20
 
-      # Instalação das dependências (dentro da pasta frontend)
+
       - name: Install Frontend Dependencies
         run: npm install
         working-directory: ./frontend 
@@ -28,13 +28,12 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # TOKEN DEPLOY: Use o secret que o Azure criou para o seu novo Static Web App.
-          # Você deve substituir o nome do secret abaixo (o nome longo) pelo que o Azure criou em seu repositório.
+
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_FLOWER_0454A3E0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          # Detalhes da Compilação
+          
           app_location: "/frontend" 
           api_location: ""  
           output_location: "dist"
